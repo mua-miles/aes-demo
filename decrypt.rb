@@ -1,4 +1,5 @@
 require('openssl')
+require('byebug')
 
 pass = 's3cr3tk3y'
 salt = "\xce\x57\x86\xaa\xa5\x8d\xd2\xd6\xbd\x38\x18\x88\xb4\x8e\xa7\x08"
@@ -20,13 +21,13 @@ puts key.split('').map{|cc| cc.ord.to_s(16).rjust(2, '0') }.join
 iv = "\x9f\x1e\x0f\xdd\x32\xce\xbc\x2c\x2e\x38\xf3\xe1\x76\xce\xb5\x58"
 # or create it randomly and share with the other side: OpenSSL::Random.random_bytes(16)
 
-data = "welcome to my bugs"
-aes = OpenSSL::Cipher::Cipher.new('AES-256-CBC')
-aes.encrypt
-aes.iv = iv
-aes.key = key
-encrypted = aes.update(data) + aes.final
-
+# data = "welcome to my bugs"
+# aes = OpenSSL::Cipher::Cipher.new('AES-256-CBC')
+# aes.encrypt
+# aes.iv = iv
+# aes.key = key
+# encrypted = aes.update(data) + aes.final
+encrypted = "IiiNVyEJnRTLmNtefAy8VifEopl8st8z4dSztFhZRIg=".unpack('m*')[0]
 # puts [cipher].pack('m')
 
 # decrypt
@@ -37,4 +38,4 @@ decipher.key = key
 
 decrypted = decipher.update(encrypted) + decipher.final
 puts decrypted 
-puts decrypted == data
+# puts decrypted == data
