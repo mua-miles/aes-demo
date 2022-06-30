@@ -1,0 +1,6 @@
+{
+  "name": "aes_example",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}
